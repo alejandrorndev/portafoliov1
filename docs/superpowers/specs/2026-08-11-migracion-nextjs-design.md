@@ -13,15 +13,15 @@ inline: markup, ~765 líneas de CSS y ~355 de JavaScript.
 
 **Qué tiene hoy:**
 
-| Área | Detalle |
-|---|---|
-| 3D | Three.js r128 vía CDN — escena de agujero negro: starfield (3.500 pts), disco de acreción (5 anillos keplerianos, ~3.700 pts), jets relativistas (1.000 pts), anillos de lensing, nube de nebulosa (600 pts) |
-| Animación | GSAP 3.12 + ScrollTrigger — entrada del hero, reveals, staggers, contador de stats, navbar `stuck`, nav link activo |
-| UI custom | Cursor propio (`cursor:none` global), loader con porcentaje simulado, typewriter de 5 roles |
-| Secciones | Hero · About · Skills · Projects · Experience · Contact · Footer |
-| Estilo | Dark cósmico, tokens en `:root` (purple `#8b5cf6`, cyan `#06b6d4`, gold `#f59e0b`, pink `#ec4899`), glassmorphism, gradientes en texto |
-| Externo | devicon vía CDN, `Segoe UI` (sin webfont) |
-| Idioma | Solo español |
+| Área      | Detalle                                                                                                                                                                                                      |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 3D        | Three.js r128 vía CDN — escena de agujero negro: starfield (3.500 pts), disco de acreción (5 anillos keplerianos, ~3.700 pts), jets relativistas (1.000 pts), anillos de lensing, nube de nebulosa (600 pts) |
+| Animación | GSAP 3.12 + ScrollTrigger — entrada del hero, reveals, staggers, contador de stats, navbar `stuck`, nav link activo                                                                                          |
+| UI custom | Cursor propio (`cursor:none` global), loader con porcentaje simulado, typewriter de 5 roles                                                                                                                  |
+| Secciones | Hero · About · Skills · Projects · Experience · Contact · Footer                                                                                                                                             |
+| Estilo    | Dark cósmico, tokens en `:root` (purple `#8b5cf6`, cyan `#06b6d4`, gold `#f59e0b`, pink `#ec4899`), glassmorphism, gradientes en texto                                                                       |
+| Externo   | devicon vía CDN, `Segoe UI` (sin webfont)                                                                                                                                                                    |
+| Idioma    | Solo español                                                                                                                                                                                                 |
 
 **Deuda técnica identificada:**
 
@@ -66,19 +66,19 @@ de privacidad.
 
 ## 4. Stack
 
-| Capa | Elección | Motivo |
-|---|---|---|
-| Framework | Next.js 15+ (App Router) | Server Components, Metadata API, Server Actions |
-| Lenguaje | TypeScript, `strict: true` | El contenido tipado es el núcleo del diseño |
-| Estilos | Tailwind CSS v4 | Tokens actuales mapeados a `@theme`; elimina 765 líneas de CSS |
-| i18n | next-intl | Estándar de facto en App Router |
-| Animación | Framer Motion | Reemplaza GSAP + ScrollTrigger; API declarativa e idiomática en React |
-| 3D | React Three Fiber + drei | Three.js con ciclo de vida gestionado por React |
-| Validación | Zod | Un mismo esquema valida contenido en build y formulario en runtime |
-| Correo | Resend | Free tier, sin tarjeta; requiere verificación DNS del dominio |
-| Rate limit | Upstash Redis | En serverless no sirve estado en memoria |
-| Tests | Vitest + Testing Library, axe-core, Playwright | Unitario/integración, accesibilidad y smoke E2E |
-| Hosting | Vercel (Hobby) | Server Actions, middleware, OG dinámica |
+| Capa       | Elección                                       | Motivo                                                                |
+| ---------- | ---------------------------------------------- | --------------------------------------------------------------------- |
+| Framework  | Next.js 15+ (App Router)                       | Server Components, Metadata API, Server Actions                       |
+| Lenguaje   | TypeScript, `strict: true`                     | El contenido tipado es el núcleo del diseño                           |
+| Estilos    | Tailwind CSS v4                                | Tokens actuales mapeados a `@theme`; elimina 765 líneas de CSS        |
+| i18n       | next-intl                                      | Estándar de facto en App Router                                       |
+| Animación  | Framer Motion                                  | Reemplaza GSAP + ScrollTrigger; API declarativa e idiomática en React |
+| 3D         | React Three Fiber + drei                       | Three.js con ciclo de vida gestionado por React                       |
+| Validación | Zod                                            | Un mismo esquema valida contenido en build y formulario en runtime    |
+| Correo     | Resend                                         | Free tier, sin tarjeta; requiere verificación DNS del dominio         |
+| Rate limit | Upstash Redis                                  | En serverless no sirve estado en memoria                              |
+| Tests      | Vitest + Testing Library, axe-core, Playwright | Unitario/integración, accesibilidad y smoke E2E                       |
+| Hosting    | Vercel (Hobby)                                 | Server Actions, middleware, OG dinámica                               |
 
 > La versión mayor exacta de Next.js y React se fija en la Fase 0 contra la última
 > estable disponible ese día. El diseño no depende de una versión mayor concreta.
@@ -160,10 +160,10 @@ de negocio real, `domain/` y `application/` se insertan detrás del mismo port.
 
 **Alternativas descartadas:**
 
-- *Hexagonal / Ports & Adapters completo*: un portafolio estático no tiene reglas de
+- _Hexagonal / Ports & Adapters completo_: un portafolio estático no tiene reglas de
   negocio que proteger. El "dominio" serían DTOs sin comportamiento, y cuatro capas
   de indirección para renderizar listas.
-- *Atomic Design*: la taxonomía atoms/molecules/organisms no describe dependencias,
+- _Atomic Design_: la taxonomía atoms/molecules/organisms no describe dependencias,
   que es el problema que una arquitectura debe resolver, y clasificar consume más
   tiempo del que ahorra.
 
@@ -186,8 +186,8 @@ export type Project = {
   type: Localized<string>
   title: Localized<string>
   description: Localized<string>
-  tags: string[]                          // no se traduce
-  icon: string                            // emoji
+  tags: string[] // no se traduce
+  icon: string // emoji
   gradient: readonly [string, string]
   links: { demo?: string; github?: string }
 }
@@ -257,14 +257,14 @@ hexadecimales. La paleta no cambia.
 
 `shared/ui` cubre lo que hoy está repetido en el CSS:
 
-| Componente | Reemplaza |
-|---|---|
+| Componente       | Reemplaza                                          |
+| ---------------- | -------------------------------------------------- |
 | `SectionHeading` | `.s-head` + `.s-tag` + `.s-title` + `.s-line` (×5) |
-| `Chip` | `.chip` (28 instancias) |
-| `Tag` | `.p-tag` y `.t-chip` (unificados) |
-| `Card` | `.p-card` y `.skill-box` |
-| `Button` | `.btn-fill` y `.btn-ghost` |
-| `Reveal` | `.rv`, `.rv-l`, `.rv-r` — wrapper de Framer Motion |
+| `Chip`           | `.chip` (28 instancias)                            |
+| `Tag`            | `.p-tag` y `.t-chip` (unificados)                  |
+| `Card`           | `.p-card` y `.skill-box`                           |
+| `Button`         | `.btn-fill` y `.btn-ghost`                         |
+| `Reveal`         | `.rv`, `.rv-l`, `.rv-r` — wrapper de Framer Motion |
 
 **Tipografía:** se abandona `Segoe UI`. Se cargan dos familias con `next/font`
 (self-hosted, sin CLS): una display para titulares y una de texto. Por defecto
@@ -371,11 +371,11 @@ Objetivo: **WCAG 2.1 AA**.
 
 Presupuesto objetivo, medido en móvil con la escena 3D activa:
 
-| Métrica | Objetivo |
-|---|---|
-| LCP | < 2,5 s |
-| INP | < 200 ms |
-| CLS | < 0,1 |
+| Métrica                       | Objetivo      |
+| ----------------------------- | ------------- |
+| LCP                           | < 2,5 s       |
+| INP                           | < 200 ms      |
+| CLS                           | < 0,1         |
 | JS inicial (sin la escena 3D) | < 150 KB gzip |
 
 Three.js no entra en el bundle inicial. El texto del hero se renderiza en servidor y
@@ -389,13 +389,13 @@ Lighthouse CI corre en cada pull request y falla el build si se rompe el presupu
 
 Los tests se escriben dentro de cada fase, no al final.
 
-| Nivel | Herramienta | Cobertura |
-|---|---|---|
-| Contenido | Vitest | Los esquemas Zod validan todos los archivos de datos; ningún `Localized<T>` incompleto |
-| Unitario | Vitest + Testing Library | Componentes de `shared/ui` y hooks |
-| Integración | Vitest + Testing Library | Formulario: validación, honeypot, estados de error y éxito |
-| Accesibilidad | `axe-core` | Sin violaciones en cada sección renderizada |
-| E2E | Playwright | Smoke: carga en ambos idiomas, navegación entre secciones, envío del formulario con Resend simulado |
+| Nivel         | Herramienta              | Cobertura                                                                                           |
+| ------------- | ------------------------ | --------------------------------------------------------------------------------------------------- |
+| Contenido     | Vitest                   | Los esquemas Zod validan todos los archivos de datos; ningún `Localized<T>` incompleto              |
+| Unitario      | Vitest + Testing Library | Componentes de `shared/ui` y hooks                                                                  |
+| Integración   | Vitest + Testing Library | Formulario: validación, honeypot, estados de error y éxito                                          |
+| Accesibilidad | `axe-core`               | Sin violaciones en cada sección renderizada                                                         |
+| E2E           | Playwright               | Smoke: carga en ambos idiomas, navegación entre secciones, envío del formulario con Resend simulado |
 
 La escena 3D no se somete a tests unitarios; se cubre con una verificación de que el
 fallback aparece cuando WebGL no está disponible o `prefers-reduced-motion` está activo.
@@ -422,16 +422,16 @@ no con la del trabajo.
 
 Cada fase deja el sitio desplegable y verificable.
 
-| # | Fase | Entrega | Riesgo |
-|---|---|---|---|
-| 0 | Andamiaje | Next.js + TS strict + Tailwind v4, ESLint con reglas de dependencia, Prettier, Husky, commitlint, Vitest, Actions, deploy vacío a Vercel | bajo |
-| 1 | Contenido e i18n | `content/` completo y bilingüe, tipos y esquemas Zod, `[locale]`, next-intl, middleware. Sin UI | bajo |
-| 2 | Design system | Tokens en `@theme`, `shared/ui`, `next/font`, devicon self-hosted | bajo |
-| 3 | Secciones | Las 6 secciones sin animación. Nav móvil real. Sitio completo y navegable | medio |
-| 4 | Movimiento | Reveals, typewriter, contador, scroll spy, loader, cursor con guardas | medio |
-| 5 | Escena 3D | R3F, carga diferida, degradación en cascada | **alto** |
-| 6 | Formulario y CV | Server Action, Resend, honeypot, rate limit, aviso de privacidad, PDFs | medio |
-| 7 | SEO, performance y a11y | Metadata, OG dinámica, JSON-LD, hreflang, sitemap, Lighthouse CI, auditoría de accesibilidad | bajo |
+| #   | Fase                    | Entrega                                                                                                                                  | Riesgo   |
+| --- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| 0   | Andamiaje               | Next.js + TS strict + Tailwind v4, ESLint con reglas de dependencia, Prettier, Husky, commitlint, Vitest, Actions, deploy vacío a Vercel | bajo     |
+| 1   | Contenido e i18n        | `content/` completo y bilingüe, tipos y esquemas Zod, `[locale]`, next-intl, middleware. Sin UI                                          | bajo     |
+| 2   | Design system           | Tokens en `@theme`, `shared/ui`, `next/font`, devicon self-hosted                                                                        | bajo     |
+| 3   | Secciones               | Las 6 secciones sin animación. Nav móvil real. Sitio completo y navegable                                                                | medio    |
+| 4   | Movimiento              | Reveals, typewriter, contador, scroll spy, loader, cursor con guardas                                                                    | medio    |
+| 5   | Escena 3D               | R3F, carga diferida, degradación en cascada                                                                                              | **alto** |
+| 6   | Formulario y CV         | Server Action, Resend, honeypot, rate limit, aviso de privacidad, PDFs                                                                   | medio    |
+| 7   | SEO, performance y a11y | Metadata, OG dinámica, JSON-LD, hreflang, sitemap, Lighthouse CI, auditoría de accesibilidad                                             | bajo     |
 
 La escena 3D va de última porque concentra el riesgo técnico. Para cuando se aborde,
 ya existe un portafolio publicable que funciona sin ella.
@@ -440,13 +440,13 @@ ya existe un portafolio publicable que funciona sin ella.
 
 ## 17. Riesgos
 
-| Riesgo | Impacto | Mitigación |
-|---|---|---|
-| La escena 3D degrada el rendimiento en móviles de gama media | Alto — es lo primero que ve un reclutador | Carga diferida, pausa fuera de viewport, partículas reducidas por viewport, fallback estático, presupuesto verificado en CI |
-| El port de Three.js a R3F introduce diferencias visuales | Medio | Fase aislada; comparación contra capturas del original; el original queda en el historial de git |
-| La traducción al inglés queda incompleta o de baja calidad | Medio — un inglés torpe resta credibilidad | `Localized<T>` impide omisiones; la calidad del texto requiere revisión humana |
-| Spam en el formulario | Medio | Honeypot + rate limit; escalar a CAPTCHA solo si se materializa |
-| Resend requiere verificación DNS del dominio | Bajo pero bloqueante para la Fase 6 | Comprar y verificar el dominio antes de esa fase |
+| Riesgo                                                       | Impacto                                    | Mitigación                                                                                                                  |
+| ------------------------------------------------------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| La escena 3D degrada el rendimiento en móviles de gama media | Alto — es lo primero que ve un reclutador  | Carga diferida, pausa fuera de viewport, partículas reducidas por viewport, fallback estático, presupuesto verificado en CI |
+| El port de Three.js a R3F introduce diferencias visuales     | Medio                                      | Fase aislada; comparación contra capturas del original; el original queda en el historial de git                            |
+| La traducción al inglés queda incompleta o de baja calidad   | Medio — un inglés torpe resta credibilidad | `Localized<T>` impide omisiones; la calidad del texto requiere revisión humana                                              |
+| Spam en el formulario                                        | Medio                                      | Honeypot + rate limit; escalar a CAPTCHA solo si se materializa                                                             |
+| Resend requiere verificación DNS del dominio                 | Bajo pero bloqueante para la Fase 6        | Comprar y verificar el dominio antes de esa fase                                                                            |
 
 ---
 
@@ -454,12 +454,12 @@ ya existe un portafolio publicable que funciona sin ella.
 
 Ninguna bloquea el inicio. Cada una tiene un valor por defecto para no detener la implementación.
 
-| Tema | Por defecto | Cuándo se decide |
-|---|---|---|
-| Dominio | `alejandrorestrepo.dev` sujeto a disponibilidad | Antes de la Fase 6 (bloquea Resend) |
-| Tipografía | Space Grotesk + Inter | Fase 2, revisión visual |
-| Analítica | Vercel Analytics | Fase 7 |
-| Teléfono público | Se retira del sitio; el formulario pasa a ser el canal de contacto | Fase 6 |
+| Tema             | Por defecto                                                        | Cuándo se decide                    |
+| ---------------- | ------------------------------------------------------------------ | ----------------------------------- |
+| Dominio          | `alejandrorestrepo.dev` sujeto a disponibilidad                    | Antes de la Fase 6 (bloquea Resend) |
+| Tipografía       | Space Grotesk + Inter                                              | Fase 2, revisión visual             |
+| Analítica        | Vercel Analytics                                                   | Fase 7                              |
+| Teléfono público | Se retira del sitio; el formulario pasa a ser el canal de contacto | Fase 6                              |
 
 ---
 
