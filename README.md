@@ -77,8 +77,8 @@ sin tocar un solo componente.
 | 0    | Andamiaje                        | ✅     |
 | 1    | Contenido e i18n                 | ✅     |
 | 2    | Design system                    | ✅     |
-| 3    | Secciones                        | ⏳     |
-| 4    | Movimiento                       | ⏳     |
+| 3    | Secciones                        | ✅     |
+| 4    | Movimiento                       | ✅     |
 | 5    | Escena 3D                        | ⏳     |
 | 6    | Formulario y CV                  | ⏳     |
 | 7    | SEO, performance y accesibilidad | ⏳     |
