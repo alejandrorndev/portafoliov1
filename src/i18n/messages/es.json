@@ -1,0 +1,80 @@
+{
+  "a11y": {
+    "skipToContent": "Saltar al contenido",
+    "openMenu": "Abrir menú de navegación",
+    "closeMenu": "Cerrar menú de navegación",
+    "decorativeScene": "Animación decorativa"
+  },
+  "nav": {
+    "about": "Sobre mí",
+    "skills": "Skills",
+    "projects": "Proyectos",
+    "experience": "Experiencia",
+    "contact": "Contacto"
+  },
+  "localeSwitcher": {
+    "label": "Cambiar idioma",
+    "current": "Idioma actual: {locale}"
+  },
+  "hero": {
+    "availableBadge": "Disponible",
+    "viewProjects": "Ver Proyectos",
+    "github": "GitHub",
+    "scrollHint": "Explorar"
+  },
+  "sections": {
+    "about": { "tag": "01 / Sobre mí", "title": "Quién", "accent": "Soy" },
+    "skills": { "tag": "02 / Stack Tecnológico", "title": "Mis", "accent": "Skills" },
+    "projects": { "tag": "03 / Proyectos", "title": "Mi", "accent": "Trabajo" },
+    "experience": { "tag": "04 / Experiencia", "title": "Mi", "accent": "Trayectoria" },
+    "contact": { "tag": "05 / Contacto", "title": "Hablemos de tu", "accent": "Proyecto" }
+  },
+  "stats": {
+    "yearsExperience": "Años Exp.",
+    "companies": "Empresas",
+    "projects": "Proyectos",
+    "technologies": "Tecnologías"
+  },
+  "projects": {
+    "demo": "Demo",
+    "sourceCode": "Código"
+  },
+  "experience": {
+    "current": "Actual",
+    "present": "Presente"
+  },
+  "contact": {
+    "intro": "Estoy disponible para nuevas oportunidades, proyectos freelance y colaboraciones. Si tienes algo en mente, escríbeme — siempre respondo.",
+    "downloadCv": "Descargar CV",
+    "form": {
+      "name": "Nombre",
+      "email": "Correo",
+      "message": "Mensaje",
+      "submit": "Enviar mensaje",
+      "sending": "Enviando…",
+      "success": "Mensaje enviado. Te respondo pronto.",
+      "error": "No se pudo enviar el mensaje. Inténtalo de nuevo o escríbeme directo a {email}.",
+      "privacyNotice": "Al enviar aceptas el <link>aviso de privacidad</link>.",
+      "errors": {
+        "nameRequired": "Escribe tu nombre.",
+        "nameTooLong": "El nombre es demasiado largo.",
+        "emailRequired": "Escribe tu correo.",
+        "emailInvalid": "Ese correo no parece válido.",
+        "messageRequired": "Escribe un mensaje.",
+        "messageTooShort": "El mensaje es muy corto.",
+        "messageTooLong": "El mensaje es demasiado largo.",
+        "rateLimited": "Demasiados envíos. Espera un momento antes de reintentar."
+      }
+    }
+  },
+  "footer": {
+    "credit": "Diseñado y desarrollado por {name}",
+    "location": "Medellín 🇨🇴",
+    "builtWith": "Hecho con {stack}"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "description": "La ruta que buscas no existe.",
+    "backHome": "Volver al inicio"
+  }
+}
