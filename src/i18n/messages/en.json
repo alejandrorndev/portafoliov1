@@ -73,6 +73,35 @@
     "location": "Medellín 🇨🇴",
     "builtWith": "Built with {stack}"
   },
+  "privacy": {
+    "title": "Privacy notice",
+    "intro": "This notice explains what personal data this site collects through its contact form, why, and how to exercise your rights over it. Colombia's Law 1581 of 2012 on habeas data applies.",
+    "controller": {
+      "title": "Data controller",
+      "body": "Alejandro Stiven Restrepo Naranjo, Medellín, Colombia. Any question about this notice can be sent to {email}."
+    },
+    "data": {
+      "title": "What is collected",
+      "body": "Only what you type into the form: name, email address and the message itself. No tracking cookies are used and no visitor profile is built."
+    },
+    "purpose": {
+      "title": "Purpose",
+      "body": "To reply to your message. The data is not used for marketing, is not shared with third parties for advertising, and is not used for any purpose other than that conversation."
+    },
+    "retention": {
+      "title": "Retention",
+      "body": "Messages are kept in the mailbox for as long as the conversation remains relevant. You can request deletion at any time."
+    },
+    "rights": {
+      "title": "Your rights",
+      "body": "You may request access, correction, update or deletion of your data, and withdraw your consent, by writing to {email}."
+    },
+    "thirdParties": {
+      "title": "Providers",
+      "body": "The site is hosted on Vercel and form submissions are sent through Resend. To limit automated abuse, the submitting IP address is stored temporarily in Upstash. Each provider processes that data under its own policies."
+    },
+    "updated": "Last updated: August 2026."
+  },
   "notFound": {
     "title": "Page not found",
     "description": "The route you're looking for doesn't exist.",

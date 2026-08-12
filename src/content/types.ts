@@ -72,6 +72,15 @@ export type Profile = {
   typewriterRoles: Localized<string>[]
   socials: SocialLink[]
   stats: Stat[]
+  /**
+   * Ruta al CV en PDF, una por idioma, relativa a `public/`.
+   *
+   * Opcional a proposito: mientras no exista, la seccion de contacto
+   * simplemente no muestra el boton de descarga. Es preferible a un enlace que
+   * lleva a un 404 — un reclutador que pulsa "Descargar CV" y recibe un error
+   * no vuelve a intentarlo.
+   */
+  cv?: Localized<string>
 }
 
 export type SkillItem = {

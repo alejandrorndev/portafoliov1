@@ -73,6 +73,35 @@
     "location": "Medellín 🇨🇴",
     "builtWith": "Hecho con {stack}"
   },
+  "privacy": {
+    "title": "Aviso de privacidad",
+    "intro": "Este aviso explica qué datos personales se recogen a través del formulario de contacto de este sitio, con qué finalidad y cómo ejercer tus derechos sobre ellos. Aplica la Ley 1581 de 2012 de habeas data de Colombia.",
+    "controller": {
+      "title": "Responsable del tratamiento",
+      "body": "Alejandro Stiven Restrepo Naranjo, Medellín, Colombia. Cualquier consulta sobre este aviso puede dirigirse a {email}."
+    },
+    "data": {
+      "title": "Datos que se recogen",
+      "body": "Únicamente los que escribes en el formulario: nombre, correo electrónico y el contenido del mensaje. No se usan cookies de seguimiento ni se elabora ningún perfil del visitante."
+    },
+    "purpose": {
+      "title": "Finalidad",
+      "body": "Responder a tu mensaje. Los datos no se usan para envíos comerciales, no se ceden a terceros con fines publicitarios y no se emplean para ninguna finalidad distinta de mantener esa conversación."
+    },
+    "retention": {
+      "title": "Conservación",
+      "body": "Los mensajes se conservan en el buzón de correo mientras la conversación siga siendo relevante. Puedes pedir su eliminación en cualquier momento."
+    },
+    "rights": {
+      "title": "Tus derechos",
+      "body": "Puedes solicitar acceso, rectificación, actualización o supresión de tus datos, así como revocar tu autorización, escribiendo a {email}."
+    },
+    "thirdParties": {
+      "title": "Proveedores",
+      "body": "El sitio se aloja en Vercel y el envío del formulario se realiza mediante Resend. Para limitar el abuso automatizado se registra temporalmente la dirección IP del envío en Upstash. Cada proveedor trata esos datos según sus propias políticas."
+    },
+    "updated": "Última actualización: agosto de 2026."
+  },
   "notFound": {
     "title": "Página no encontrada",
     "description": "La ruta que buscas no existe.",
