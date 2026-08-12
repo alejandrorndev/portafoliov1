@@ -66,19 +66,19 @@ de privacidad.
 
 ## 4. Stack
 
-| Capa       | Elección                                       | Motivo                                                                |
-| ---------- | ---------------------------------------------- | --------------------------------------------------------------------- |
-| Framework  | Next.js 15+ (App Router)                       | Server Components, Metadata API, Server Actions                       |
-| Lenguaje   | TypeScript, `strict: true`                     | El contenido tipado es el núcleo del diseño                           |
-| Estilos    | Tailwind CSS v4                                | Tokens actuales mapeados a `@theme`; elimina 765 líneas de CSS        |
-| i18n       | next-intl                                      | Estándar de facto en App Router                                       |
-| Animación  | Framer Motion                                  | Reemplaza GSAP + ScrollTrigger; API declarativa e idiomática en React |
-| 3D         | React Three Fiber + drei                       | Three.js con ciclo de vida gestionado por React                       |
-| Validación | Zod                                            | Un mismo esquema valida contenido en build y formulario en runtime    |
-| Correo     | Resend                                         | Free tier, sin tarjeta; requiere verificación DNS del dominio         |
-| Rate limit | Upstash Redis                                  | En serverless no sirve estado en memoria                              |
-| Tests      | Vitest + Testing Library, axe-core, Playwright | Unitario/integración, accesibilidad y smoke E2E                       |
-| Hosting    | Vercel (Hobby)                                 | Server Actions, middleware, OG dinámica                               |
+| Capa       | Elección                                       | Motivo                                                             |
+| ---------- | ---------------------------------------------- | ------------------------------------------------------------------ |
+| Framework  | Next.js 15+ (App Router)                       | Server Components, Metadata API, Server Actions                    |
+| Lenguaje   | TypeScript, `strict: true`                     | El contenido tipado es el núcleo del diseño                        |
+| Estilos    | Tailwind CSS v4                                | Tokens actuales mapeados a `@theme`; elimina 765 líneas de CSS     |
+| i18n       | next-intl                                      | Estándar de facto en App Router                                    |
+| Animación  | IntersectionObserver + transiciones CSS        | Ver la corrección en §13: Framer Motion se descartó en la Fase 4   |
+| 3D         | React Three Fiber + drei                       | Three.js con ciclo de vida gestionado por React                    |
+| Validación | Zod                                            | Un mismo esquema valida contenido en build y formulario en runtime |
+| Correo     | Resend                                         | Free tier, sin tarjeta; requiere verificación DNS del dominio      |
+| Rate limit | Upstash Redis                                  | En serverless no sirve estado en memoria                           |
+| Tests      | Vitest + Testing Library, axe-core, Playwright | Unitario/integración, accesibilidad y smoke E2E                    |
+| Hosting    | Vercel (Hobby)                                 | Server Actions, middleware, OG dinámica                            |
 
 > La versión mayor exacta de Next.js y React se fija en la Fase 0 contra la última
 > estable disponible ese día. El diseño no depende de una versión mayor concreta.
@@ -371,12 +371,25 @@ Objetivo: **WCAG 2.1 AA**.
 
 Presupuesto objetivo, medido en móvil con la escena 3D activa:
 
-| Métrica                       | Objetivo      |
-| ----------------------------- | ------------- |
-| LCP                           | < 2,5 s       |
-| INP                           | < 200 ms      |
-| CLS                           | < 0,1         |
-| JS inicial (sin la escena 3D) | < 150 KB gzip |
+| Métrica                    | Objetivo      |
+| -------------------------- | ------------- |
+| LCP                        | < 2,5 s       |
+| INP                        | < 200 ms      |
+| CLS                        | < 0,1         |
+| JS de nuestro código       | < 60 KB gzip  |
+| JS total, sin la escena 3D | < 210 KB gzip |
+
+> **Corrección (Fase 4).** La versión original de esta tabla fijaba un único
+> objetivo de «JS inicial < 150 KB gzip». Ese número se puso sin medir la base
+> del framework, y resultó inalcanzable: Next 16 más React 19 cuestan ~170 KB
+> gzip antes de la primera línea de código propio. Medido al cerrar la Fase 4:
+> 197,5 KB en total, de los cuales ~28 KB son código nuestro.
+>
+> El presupuesto se parte en dos porque solo una mitad es accionable. La base
+> del framework se controla eligiendo framework, decisión ya tomada; lo que sí
+> se puede vigilar es cuánto se le suma encima. Fue el criterio para descartar
+> Framer Motion en la Fase 4: sus ~34 KB habrían más que duplicado nuestra
+> parte.
 
 Three.js no entra en el bundle inicial. El texto del hero se renderiza en servidor y
 es el candidato a LCP; no debe depender de la escena.

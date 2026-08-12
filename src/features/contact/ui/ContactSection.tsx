@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { getProfile } from '@/content'
 import type { Locale } from '@/i18n/config'
-import { DevIcon, GradientText, Section, SectionHeading } from '@/shared/ui'
+import { DevIcon, GradientText, Reveal, Section, SectionHeading } from '@/shared/ui'
 
 /**
  * Seccion de contacto.
@@ -16,14 +16,16 @@ export async function ContactSection({ locale }: { locale: Locale }) {
 
   return (
     <Section id="contact" labelledBy="contact-heading" alt>
-      <SectionHeading
-        id="contact-heading"
-        tag={t('sections.contact.tag')}
-        title={t('sections.contact.title')}
-        accent={t('sections.contact.accent')}
-      />
+      <Reveal>
+        <SectionHeading
+          id="contact-heading"
+          tag={t('sections.contact.tag')}
+          title={t('sections.contact.title')}
+          accent={t('sections.contact.accent')}
+        />
+      </Reveal>
 
-      <div className="mx-auto max-w-2xl text-center">
+      <Reveal className="mx-auto max-w-2xl text-center">
         <p className="text-muted leading-loose">{t('contact.intro')}</p>
 
         <a
@@ -51,7 +53,7 @@ export async function ContactSection({ locale }: { locale: Locale }) {
             )
           })}
         </ul>
-      </div>
+      </Reveal>
     </Section>
   )
 }

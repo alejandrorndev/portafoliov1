@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { getExperience } from '@/content'
 import type { Locale } from '@/i18n/config'
-import { ACCENT_BG, ACCENT_TEXT, Section, SectionHeading, Tag } from '@/shared/ui'
+import { ACCENT_BG, ACCENT_TEXT, Reveal, Section, SectionHeading, Tag } from '@/shared/ui'
 import { cn } from '@/shared/lib/cn'
 
 export async function ExperienceSection({ locale }: { locale: Locale }) {
@@ -10,12 +10,14 @@ export async function ExperienceSection({ locale }: { locale: Locale }) {
 
   return (
     <Section id="experience" labelledBy="experience-heading">
-      <SectionHeading
-        id="experience-heading"
-        tag={t('sections.experience.tag')}
-        title={t('sections.experience.title')}
-        accent={t('sections.experience.accent')}
-      />
+      <Reveal>
+        <SectionHeading
+          id="experience-heading"
+          tag={t('sections.experience.tag')}
+          title={t('sections.experience.title')}
+          accent={t('sections.experience.accent')}
+        />
+      </Reveal>
 
       <ol className="relative mx-auto max-w-3xl">
         {/* La linea de la cronologia es decorativa; el orden lo da el <ol>. */}
@@ -24,8 +26,14 @@ export async function ExperienceSection({ locale }: { locale: Locale }) {
           className="via-cyan from-purple to-pink absolute inset-y-0 left-0 w-px bg-gradient-to-b"
         />
 
-        {items.map((item) => (
-          <li key={item.id} className="relative pb-12 pl-12 last:pb-0">
+        {items.map((item, index) => (
+          <Reveal
+            as="li"
+            key={item.id}
+            direction="left"
+            delay={index * 100}
+            className="relative pb-12 pl-12 last:pb-0"
+          >
             <span
               aria-hidden="true"
               className={cn(
@@ -55,7 +63,7 @@ export async function ExperienceSection({ locale }: { locale: Locale }) {
                 </li>
               ))}
             </ul>
-          </li>
+          </Reveal>
         ))}
       </ol>
     </Section>

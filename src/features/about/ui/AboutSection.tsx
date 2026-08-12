@@ -1,8 +1,9 @@
 import { getTranslations } from 'next-intl/server'
 import { getProfile } from '@/content'
 import type { Locale } from '@/i18n/config'
-import { RichText, Section, SectionHeading } from '@/shared/ui'
+import { Reveal, RichText, Section, SectionHeading } from '@/shared/ui'
 import { AvatarOrbit } from './AvatarOrbit'
+import { StatCounter } from './StatCounter'
 
 export async function AboutSection({ locale }: { locale: Locale }) {
   const t = await getTranslations()
@@ -10,17 +11,21 @@ export async function AboutSection({ locale }: { locale: Locale }) {
 
   return (
     <Section id="about" labelledBy="about-heading" alt>
-      <SectionHeading
-        id="about-heading"
-        tag={t('sections.about.tag')}
-        title={t('sections.about.title')}
-        accent={t('sections.about.accent')}
-      />
+      <Reveal>
+        <SectionHeading
+          id="about-heading"
+          tag={t('sections.about.tag')}
+          title={t('sections.about.title')}
+          accent={t('sections.about.accent')}
+        />
+      </Reveal>
 
       <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
-        <AvatarOrbit />
+        <Reveal direction="left">
+          <AvatarOrbit />
+        </Reveal>
 
-        <div className="text-center lg:text-left">
+        <Reveal direction="right" className="text-center lg:text-left">
           <h3 className="font-display text-2xl font-bold">{profile.fullName}</h3>
           <p className="text-purple mt-1 text-xs tracking-[0.2em] uppercase">{profile.role}</p>
 
@@ -45,8 +50,7 @@ export async function AboutSection({ locale }: { locale: Locale }) {
                 <dt className="sr-only">{t(`stats.${stat.labelKey}`)}</dt>
                 <dd>
                   <span className="text-gradient font-display block text-3xl font-bold">
-                    {stat.value}
-                    {stat.suffix}
+                    <StatCounter value={stat.value} suffix={stat.suffix} />
                   </span>
                   <span aria-hidden="true" className="text-muted mt-1 block text-xs tracking-wide">
                     {t(`stats.${stat.labelKey}`)}
@@ -55,7 +59,7 @@ export async function AboutSection({ locale }: { locale: Locale }) {
               </div>
             ))}
           </dl>
-        </div>
+        </Reveal>
       </div>
     </Section>
   )

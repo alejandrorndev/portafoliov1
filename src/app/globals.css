@@ -61,6 +61,57 @@
 
   /* --- Movimiento --- */
   --ease-brand: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --animate-orbit-slow: orbit 22s linear infinite;
+  --animate-orbit-mid: orbit 14s linear infinite reverse;
+  --animate-orbit-fast: orbit 8s linear infinite;
+  --animate-blink: blink 1.4s ease-in-out infinite;
+  --animate-caret: blink 0.85s steps(1) infinite;
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+  --animate-scroll-hint: scroll-hint 1.7s ease-in-out infinite;
+
+  @keyframes orbit {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.15;
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      box-shadow:
+        0 0 30px rgb(139 92 246 / 0.3),
+        inset 0 0 30px rgb(0 0 0 / 0.5);
+    }
+    50% {
+      box-shadow:
+        0 0 60px rgb(139 92 246 / 0.55),
+        0 0 20px rgb(6 182 212 / 0.3),
+        inset 0 0 30px rgb(0 0 0 / 0.5);
+    }
+  }
+
+  @keyframes scroll-hint {
+    0%,
+    100% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scaleY(0.4);
+      opacity: 0.3;
+    }
+  }
 }
 
 /*
@@ -129,6 +180,58 @@
   ::-webkit-scrollbar-thumb {
     background: var(--color-purple);
     border-radius: 2px;
+  }
+
+  /*
+   * -------------------------------------------------------------------------
+   * REVEALS AL ENTRAR EN VIEWPORT
+   * -------------------------------------------------------------------------
+   * Todo cuelga de [data-motion='on'], que un script diminuto en el <head>
+   * pone en <html> solo si hay JavaScript y el usuario no pidio menos
+   * movimiento.
+   *
+   * El orden importa: el estado oculto NO existe por defecto. Si el JS falla,
+   * no carga o el usuario prefiere menos movimiento, el contenido simplemente
+   * esta visible. La alternativa habitual —ocultar en CSS y revelar con JS—
+   * deja un portafolio en blanco cuando algo va mal, que es justo el fallo que
+   * no se puede permitir.
+   * -------------------------------------------------------------------------
+   */
+  [data-motion='on'] [data-reveal] {
+    opacity: 0;
+    transition:
+      opacity 0.7s var(--ease-brand),
+      transform 0.7s var(--ease-brand);
+  }
+
+  [data-motion='on'] [data-reveal='up'] {
+    transform: translateY(28px);
+  }
+  [data-motion='on'] [data-reveal='left'] {
+    transform: translateX(-36px);
+  }
+  [data-motion='on'] [data-reveal='right'] {
+    transform: translateX(36px);
+  }
+  [data-motion='on'] [data-reveal='scale'] {
+    transform: scale(0.94);
+  }
+
+  [data-motion='on'] [data-reveal][data-visible='true'] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /*
+   * El cursor nativo solo se oculta cuando el personalizado esta activo, que
+   * a su vez exige (pointer: fine). El original ponia `cursor: none` global,
+   * asi que en un dispositivo tactil o con JS caido el usuario se quedaba sin
+   * cursor visible.
+   */
+  [data-cursor='custom'],
+  [data-cursor='custom'] a,
+  [data-cursor='custom'] button {
+    cursor: none;
   }
 }
 

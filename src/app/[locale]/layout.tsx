@@ -3,9 +3,11 @@ import { notFound } from 'next/navigation'
 import { hasLocale, NextIntlClientProvider } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import { getProfile } from '@/content'
+import { CustomCursor } from '@/features/cursor'
 import { LOCALES } from '@/i18n/config'
 import { routing } from '@/i18n/routing'
 import { fontVariables } from '@/shared/lib/fonts'
+import { MOTION_FLAG_SCRIPT } from '@/shared/lib/motion-flag'
 import '../globals.css'
 
 type LocaleParams = { locale: string }
@@ -60,7 +62,15 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={fontVariables}>
       <body>
+        {/*
+          Va primero en el <body> para ejecutarse antes de que se pinte el
+          contenido. Si se retrasara a la hidratacion, cada seccion se veria un
+          instante antes de ocultarse para entrar animada.
+        */}
+        <script dangerouslySetInnerHTML={{ __html: MOTION_FLAG_SCRIPT }} />
+
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <CustomCursor />
       </body>
     </html>
   )
