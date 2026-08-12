@@ -298,9 +298,9 @@ global y pasa a estar acotado a ese mismo condicional.
 ### Loader
 
 El loader actual simula progreso con `Math.random()` durante ~1,5 s antes de mostrar
-nada. Se sustituye por un estado ligado a la carga real de la escena 3D, y el
-contenido del hero (texto, botones) se muestra de inmediato sin esperarlo. El texto
-no debe estar bloqueado por una animación decorativa.
+nada. Se elimina sin sustituto: la escena 3D es procedural y no descarga ningún
+asset, así que no hay carga real que anunciar. El contenido del hero se muestra de
+inmediato. El texto no debe estar bloqueado por una animación decorativa.
 
 ### Escena 3D
 
@@ -309,13 +309,31 @@ Se porta a React Three Fiber conservando la geometría y la paleta. Aislada en
 
 Degradación en cascada:
 
-1. `prefers-reduced-motion` activo → imagen estática, no se descarga Three.js.
-2. Sin WebGL → imagen estática.
-3. Fuera del viewport → el bucle de render se pausa.
+1. `prefers-reduced-motion` activo → respaldo estático, no se descarga Three.js.
+2. Sin WebGL → respaldo estático.
+3. Escena invisible → el bucle de render se pausa.
 4. `devicePixelRatio` limitado a 2 (ya está en el código actual, se conserva).
-5. Conteo de partículas reducido en viewports pequeños.
+5. Conteo de partículas escalado por ancho de pantalla, núcleos y memoria.
 
-La imagen de fallback es una captura de la escena, servida como `next/image`.
+El respaldo es **CSS**, no una captura de pantalla: gradientes que conservan la
+silueta y la paleta. Pesa cero bytes, no añade una petición, y no puede quedar
+desfasado respecto a la escena real. Se pinta siempre por debajo, de modo que el
+hero nunca está vacío.
+
+### Anclaje y desvanecido
+
+**Corrección posterior a la Fase 5.** El original anclaba el canvas con
+`position: absolute` dentro del hero, y así se portó en primera instancia. Se
+cambia a `position: fixed` con `z-index` negativo: el contenido pasa por encima al
+hacer scroll —sensación de parallax— y la escena se desvanece conforme el hero sale
+de pantalla, apagando su bucle de render al volverse invisible.
+
+Se evaluó y descartó dejarla fija como fondo de toda la página. Un fondo a página
+completa nunca sale del viewport, así que la pausa deja de ser posible por
+definición: seguiría dibujando 8.800 partículas con mezcla aditiva durante el ~85%
+de la visita, detrás de contenido mayoritariamente opaco. Además, las secciones
+necesitarían fondo propio para que el texto siguiera siendo legible, con lo que el
+canvas solo se vería por los huecos — coste completo a cambio de una fracción.
 
 ---
 
