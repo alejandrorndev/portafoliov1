@@ -1,6 +1,7 @@
 {
   "a11y": {
     "skipToContent": "Saltar al contenido",
+    "mainNav": "Navegación principal",
     "openMenu": "Abrir menú de navegación",
     "closeMenu": "Cerrar menú de navegación",
     "decorativeScene": "Animación decorativa"
