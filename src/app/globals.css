@@ -1,0 +1,16 @@
+@import 'tailwindcss';
+
+/*
+ * Los tokens de diseno (paleta, sombras, easings) entran en la Fase 2,
+ * portados desde el :root de docs/legacy/index.html a un bloque @theme.
+ * Por ahora solo lo minimo para que el andamiaje sea verificable.
+ */
+
+@theme {
+  --color-bg: #00000d;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: #f1f5f9;
+}
