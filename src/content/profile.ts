@@ -60,13 +60,13 @@ export const profile: Profile = {
       id: 'github',
       label: 'GitHub',
       href: 'https://github.com/alejandrorndev',
-      icon: 'devicon-github-original',
+      icon: 'github-original',
     },
     {
       id: 'linkedin',
       label: 'LinkedIn',
       href: 'https://www.linkedin.com/in/alejandro-stiven-restrepo-naranjo-2bb429186/',
-      icon: 'devicon-linkedin-plain colored',
+      icon: 'linkedin-plain',
     },
     {
       id: 'email',

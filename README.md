@@ -17,17 +17,18 @@ Next.js 16 (App Router) · React 19 · TypeScript strict · Tailwind CSS v4 · V
 
 ## Comandos
 
-| Comando           | Qué hace                                         |
-| ----------------- | ------------------------------------------------ |
-| `pnpm dev`        | Servidor de desarrollo en http://localhost:3000  |
-| `pnpm build`      | Build de producción                              |
-| `pnpm start`      | Sirve el build de producción                     |
-| `pnpm verify`     | Tipos + lint + formato + tests (lo mismo que CI) |
-| `pnpm typecheck`  | `tsc --noEmit`                                   |
-| `pnpm lint`       | ESLint                                           |
-| `pnpm format`     | Aplica Prettier                                  |
-| `pnpm test`       | Tests                                            |
-| `pnpm test:watch` | Tests en modo watch                              |
+| Comando           | Qué hace                                            |
+| ----------------- | --------------------------------------------------- |
+| `pnpm dev`        | Servidor de desarrollo en http://localhost:3000     |
+| `pnpm build`      | Build de producción                                 |
+| `pnpm start`      | Sirve el build de producción                        |
+| `pnpm verify`     | Tipos + lint + formato + tests (lo mismo que CI)    |
+| `pnpm typecheck`  | `tsc --noEmit`                                      |
+| `pnpm lint`       | ESLint                                              |
+| `pnpm format`     | Aplica Prettier                                     |
+| `pnpm test`       | Tests                                               |
+| `pnpm test:watch` | Tests en modo watch                                 |
+| `pnpm icons`      | Regenera los SVG de devicon usados por el contenido |
 
 ## Arquitectura
 
@@ -75,7 +76,7 @@ sin tocar un solo componente.
 | ---- | -------------------------------- | ------ |
 | 0    | Andamiaje                        | ✅     |
 | 1    | Contenido e i18n                 | ✅     |
-| 2    | Design system                    | ⏳     |
+| 2    | Design system                    | ✅     |
 | 3    | Secciones                        | ⏳     |
 | 4    | Movimiento                       | ⏳     |
 | 5    | Escena 3D                        | ⏳     |

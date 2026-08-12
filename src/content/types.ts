@@ -1,4 +1,9 @@
 import type { Locale } from '@/i18n/config'
+// Import directo del modulo de acentos, no del barrel de shared/ui: ese barrel
+// arrastra componentes de React, y este archivo lo cargan los datos durante el
+// build. No hay razon para meter React en ese grafo.
+import type { Accent } from '@/shared/ui/accent'
+import type { IconName } from '@/shared/ui/icons.generated'
 
 /**
  * Un valor que existe en todos los idiomas.
@@ -15,9 +20,12 @@ export type Localized<T> = Record<Locale, T>
  * En el HTML original esto se resolvia con `:nth-child(2) { color: cyan }`, asi
  * que reordenar un array desbarataba la paleta. Como dato, el color viaja con
  * el contenido y el orden deja de importar.
+ *
+ * La definicion vive en el sistema de diseño: es vocabulario visual, no
+ * contenido. Aqui solo se reexporta para que los archivos de datos no tengan
+ * que conocer esa ruta.
  */
-export const ACCENTS = ['purple', 'cyan', 'pink', 'gold'] as const
-export type Accent = (typeof ACCENTS)[number]
+export { ACCENTS, type Accent } from '@/shared/ui/accent'
 
 /**
  * Texto con enfasis ligero.
@@ -35,8 +43,8 @@ export type SocialLink = {
   id: string
   label: string
   href: string
-  /** Clase de devicon, o `null` si el icono se resuelve de otra forma. */
-  icon: string | null
+  /** Icono vendorizado, o `null` si no lleva. */
+  icon: IconName | null
 }
 
 export type Stat = {
@@ -68,8 +76,12 @@ export type Profile = {
 
 export type SkillItem = {
   name: string
-  /** Clase de devicon. */
-  icon: string
+  /**
+   * Icono vendorizado por scripts/generate-icons.mjs.
+   * El tipo se genera a partir de los SVG disponibles, asi que un nombre mal
+   * escrito no compila.
+   */
+  icon: IconName
 }
 
 export type SkillCategory = {
