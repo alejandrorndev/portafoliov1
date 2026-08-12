@@ -44,3 +44,36 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+  lighthouse:
+    name: Lighthouse
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Depende de verify para no gastar una máquina si el build ya está roto.
+    needs: verify
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      # Accesibilidad, SEO y CLS se evalúan como error: son deterministas y no
+      # dependen de lo cargada que esté la máquina.
+      #
+      # Rendimiento y LCP quedan como aviso a propósito. Una máquina compartida
+      # de CI da variaciones de decenas de puntos entre corridas idénticas, y un
+      # umbral duro sobre eso produce fallos que no corresponden a ningún cambio
+      # real — la vía más rápida para que el equipo aprenda a ignorar el job.
+      - name: Lighthouse CI
+        run: pnpm dlx @lhci/cli@0.15.x autorun

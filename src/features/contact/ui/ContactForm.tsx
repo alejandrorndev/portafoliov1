@@ -5,7 +5,10 @@ import { useFormStatus } from 'react-dom'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { cn } from '@/shared/lib/cn'
-import { MESSAGE_MAX } from '../model/schema'
+// MESSAGE_MAX viene de limits.ts, no de schema.ts: schema.ts importa zod y
+// bastaría este import de valor para arrastrar ~70 KB gzip al navegador.
+// El tipo sí puede venir de schema.ts — `import type` se borra al compilar.
+import { MESSAGE_MAX } from '../model/limits'
 import type { ContactState } from '../model/schema'
 import { sendMessage } from '../model/send-message'
 

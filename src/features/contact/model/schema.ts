@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { MESSAGE_MAX, MESSAGE_MIN, NAME_MAX } from './limits'
 
 /*
  * -----------------------------------------------------------------------------
@@ -17,9 +18,7 @@ import { z } from 'zod'
  * -----------------------------------------------------------------------------
  */
 
-export const MESSAGE_MIN = 20
-export const MESSAGE_MAX = 2000
-export const NAME_MAX = 80
+export { MESSAGE_MAX, MESSAGE_MIN, NAME_MAX } from './limits'
 
 export const contactSchema = z.object({
   name: z.string().trim().min(1, 'nameRequired').max(NAME_MAX, 'nameTooLong'),

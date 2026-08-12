@@ -397,6 +397,10 @@ Presupuesto objetivo, medido en móvil con la escena 3D activa:
 | JS de nuestro código       | < 60 KB gzip  |
 | JS total, sin la escena 3D | < 210 KB gzip |
 
+Medido al cerrar la Fase 7: **202,1 KB gzip** de JS inicial, sin Three.js ni Zod. El
+chunk de la escena 3D son 229,9 KB aparte, que solo se descargan si el dispositivo
+va a dibujarla.
+
 > **Corrección (Fase 4).** La versión original de esta tabla fijaba un único
 > objetivo de «JS inicial < 150 KB gzip». Ese número se puso sin medir la base
 > del framework, y resultó inalcanzable: Next 16 más React 19 cuestan ~170 KB

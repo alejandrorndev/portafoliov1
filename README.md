@@ -81,7 +81,7 @@ sin tocar un solo componente.
 | 4    | Movimiento                       | ✅     |
 | 5    | Escena 3D                        | ✅     |
 | 6    | Formulario y CV                  | ✅\*   |
-| 7    | SEO, performance y accesibilidad | ⏳     |
+| 7    | SEO, performance y accesibilidad | ✅     |
 
 \* El código está completo y probado, pero el formulario **no envía correos todavía**:
 faltan las variables de entorno. Ver abajo.

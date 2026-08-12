@@ -73,6 +73,9 @@
     "location": "Medellín 🇨🇴",
     "builtWith": "Built with {stack}"
   },
+  "meta": {
+    "keywords": "backend developer, NestJS, Node.js, TypeScript, GraphQL, AWS, hexagonal architecture, DDD, CQRS, microservices, Medellín, Colombia"
+  },
   "privacy": {
     "title": "Privacy notice",
     "intro": "This notice explains what personal data this site collects through its contact form, why, and how to exercise your rights over it. Colombia's Law 1581 of 2012 on habeas data applies.",
