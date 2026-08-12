@@ -1,0 +1,80 @@
+{
+  "a11y": {
+    "skipToContent": "Skip to content",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "decorativeScene": "Decorative animation"
+  },
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "localeSwitcher": {
+    "label": "Change language",
+    "current": "Current language: {locale}"
+  },
+  "hero": {
+    "availableBadge": "Available",
+    "viewProjects": "View Projects",
+    "github": "GitHub",
+    "scrollHint": "Explore"
+  },
+  "sections": {
+    "about": { "tag": "01 / About", "title": "Who I", "accent": "Am" },
+    "skills": { "tag": "02 / Tech Stack", "title": "My", "accent": "Skills" },
+    "projects": { "tag": "03 / Projects", "title": "My", "accent": "Work" },
+    "experience": { "tag": "04 / Experience", "title": "My", "accent": "Journey" },
+    "contact": { "tag": "05 / Contact", "title": "Let's talk about your", "accent": "Project" }
+  },
+  "stats": {
+    "yearsExperience": "Years Exp.",
+    "companies": "Companies",
+    "projects": "Projects",
+    "technologies": "Technologies"
+  },
+  "projects": {
+    "demo": "Demo",
+    "sourceCode": "Source"
+  },
+  "experience": {
+    "current": "Current",
+    "present": "Present"
+  },
+  "contact": {
+    "intro": "I'm open to new opportunities, freelance work and collaborations. If you have something in mind, drop me a line — I always reply.",
+    "downloadCv": "Download CV",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send message",
+      "sending": "Sending…",
+      "success": "Message sent. I'll get back to you soon.",
+      "error": "The message couldn't be sent. Try again or email me directly at {email}.",
+      "privacyNotice": "By sending this you accept the <link>privacy notice</link>.",
+      "errors": {
+        "nameRequired": "Enter your name.",
+        "nameTooLong": "That name is too long.",
+        "emailRequired": "Enter your email.",
+        "emailInvalid": "That email doesn't look valid.",
+        "messageRequired": "Write a message.",
+        "messageTooShort": "That message is too short.",
+        "messageTooLong": "That message is too long.",
+        "rateLimited": "Too many submissions. Wait a moment before trying again."
+      }
+    }
+  },
+  "footer": {
+    "credit": "Designed and built by {name}",
+    "location": "Medellín 🇨🇴",
+    "builtWith": "Built with {stack}"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The route you're looking for doesn't exist.",
+    "backHome": "Back home"
+  }
+}

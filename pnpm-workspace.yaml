@@ -1,3 +1,8 @@
+# Dependencias transitivas con scripts de instalacion. Todas publican binarios
+# precompilados, asi que no hace falta ejecutarlos: sin esta lista pnpm sale con
+# codigo 1 y tumba el `pnpm install --frozen-lockfile` de CI.
 allowBuilds:
   sharp: false
   unrs-resolver: false
+  '@parcel/watcher': false
+  '@swc/core': false

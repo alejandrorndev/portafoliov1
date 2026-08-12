@@ -1,4 +1,7 @@
 import type { NextConfig } from 'next'
+import createNextIntlPlugin from 'next-intl/plugin'
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -9,9 +12,6 @@ const nextConfig: NextConfig = {
   // El lint no se configura aqui: Next 16 lo saco del build. Corre como paso
   // propio en CI (`pnpm lint`) y en el hook de pre-commit.
   typescript: { ignoreBuildErrors: false },
-
-  // El plugin de next-intl se monta en la Fase 1, cuando entre el routing por
-  // locale.
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig)

@@ -74,7 +74,7 @@ sin tocar un solo componente.
 | Fase | Descripción                      | Estado |
 | ---- | -------------------------------- | ------ |
 | 0    | Andamiaje                        | ✅     |
-| 1    | Contenido e i18n                 | ⏳     |
+| 1    | Contenido e i18n                 | ✅     |
 | 2    | Design system                    | ⏳     |
 | 3    | Secciones                        | ⏳     |
 | 4    | Movimiento                       | ⏳     |
