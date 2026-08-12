@@ -5,6 +5,7 @@ import { setRequestLocale } from 'next-intl/server'
 import { getProfile } from '@/content'
 import { LOCALES } from '@/i18n/config'
 import { routing } from '@/i18n/routing'
+import { fontVariables } from '@/shared/lib/fonts'
 import '../globals.css'
 
 type LocaleParams = { locale: string }
@@ -57,7 +58,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale)
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={fontVariables}>
       <body>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>

@@ -2,13 +2,23 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getExperience, getProfile, getProjects, getSkillCategories } from '@/content'
 import { LOCALES, type Locale } from '@/i18n/config'
 import { Link } from '@/i18n/navigation'
+import {
+  ACCENTS,
+  Button,
+  Card,
+  Chip,
+  GradientText,
+  RichText,
+  SectionHeading,
+  Tag,
+} from '@/shared/ui'
 
 /*
- * Pagina de verificacion de la Fase 1.
+ * Muestrario del sistema de diseño (Fase 2).
  *
- * No es diseño: es la prueba de que la capa de contenido y el i18n funcionan de
- * punta a punta. Lee del port, resuelve al idioma activo y muestra lo que
- * encontro. Las secciones reales llegan en la Fase 3 y esto desaparece.
+ * No es la landing: es la forma de ver cada primitivo con contenido real y
+ * comprobar que los tokens portados se ven como el original. Lo reemplaza la
+ * composicion de secciones en la Fase 3.
  */
 export default async function Home({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params
@@ -20,20 +30,22 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
   const projects = getProjects(locale)
   const experience = getExperience(locale)
 
-  const skillCount = skills.reduce((total, category) => total + category.items.length, 0)
-  const current = experience.find((item) => item.isCurrent)
+  const firstSkill = skills[0]
+  const firstProject = projects[0]
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-2xl flex-col gap-8 p-8">
-      <header className="flex items-center justify-between gap-4">
-        <span className="text-xl font-black tracking-widest">{profile.brand}</span>
-        <nav className="flex gap-3 text-sm">
+    <main className="mx-auto max-w-4xl px-6 py-20">
+      <header className="mb-20 flex items-center justify-between gap-4">
+        <span className="font-display text-xl font-bold tracking-widest">
+          <GradientText>{profile.brand}</GradientText>
+        </span>
+        <nav className="flex gap-4 text-sm">
           {LOCALES.map((l) => (
             <Link
               key={l}
               href="/"
               locale={l}
-              className={l === locale ? 'font-bold underline' : 'text-slate-500'}
+              className={l === locale ? 'text-cyan font-bold' : 'text-muted hover:text-ink'}
             >
               {l.toUpperCase()}
             </Link>
@@ -41,31 +53,115 @@ export default async function Home({ params }: { params: Promise<{ locale: Local
         </nav>
       </header>
 
-      <div>
-        <h1 className="text-3xl font-black">
-          {profile.displayName.first} {profile.displayName.last}
-        </h1>
-        <p className="text-slate-400">{profile.role}</p>
-        <p className="text-sm text-slate-500">{profile.location}</p>
+      <SectionHeading id="showcase" tag={t('sections.skills.tag')} title="Design" accent="System" />
+
+      <div className="space-y-16">
+        {/* Tipografia */}
+        <section aria-label="Tipografía">
+          <h3 className="text-muted mb-4 text-xs tracking-widest uppercase">Tipografía</h3>
+          <p className="font-display text-4xl font-bold">
+            {profile.displayName.first} <GradientText>{profile.displayName.last}</GradientText>
+          </p>
+          <p className="text-muted mt-2">{profile.role}</p>
+          <p className="mt-4 max-w-lg leading-relaxed">
+            <RichText>{profile.summary}</RichText>
+          </p>
+        </section>
+
+        {/* Botones */}
+        <section aria-label="Botones">
+          <h3 className="text-muted mb-4 text-xs tracking-widest uppercase">Botones</h3>
+          <div className="flex flex-wrap gap-3">
+            <Button href="#showcase">{t('hero.viewProjects')}</Button>
+            <Button href="https://github.com/alejandrorndev" variant="ghost">
+              {t('hero.github')}
+            </Button>
+          </div>
+        </section>
+
+        {/* Acentos */}
+        <section aria-label="Acentos">
+          <h3 className="text-muted mb-4 text-xs tracking-widest uppercase">
+            Acentos · pasa el cursor
+          </h3>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {ACCENTS.map((accent) => (
+              <Card key={accent} accent={accent} className="p-5">
+                <p className="text-sm font-semibold capitalize">{accent}</p>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Chips */}
+        {firstSkill ? (
+          <section aria-label="Chips">
+            <h3 className="text-muted mb-4 text-xs tracking-widest uppercase">
+              Chips · {firstSkill.title}
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {firstSkill.items.map((item) => (
+                <Chip key={item.name} icon={item.icon}>
+                  {item.name}
+                </Chip>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        {/* Tarjeta de proyecto */}
+        {firstProject ? (
+          <section aria-label="Tarjeta">
+            <h3 className="text-muted mb-4 text-xs tracking-widest uppercase">Tarjeta</h3>
+            <Card className="max-w-md overflow-hidden">
+              <div
+                aria-hidden="true"
+                className="flex h-32 items-center justify-center text-4xl"
+                style={{
+                  backgroundImage: `linear-gradient(135deg, ${firstProject.gradient[0]}, ${firstProject.gradient[1]})`,
+                  opacity: 0.85,
+                }}
+              >
+                {firstProject.icon}
+              </div>
+              <div className="p-5">
+                <p className="text-purple text-xs tracking-widest uppercase">{firstProject.type}</p>
+                <h4 className="font-display mt-1 text-lg font-bold">{firstProject.title}</h4>
+                <p className="text-muted mt-2 text-sm leading-relaxed">
+                  {firstProject.description}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {firstProject.tags.map((tag) => (
+                    <Tag key={tag}>{tag}</Tag>
+                  ))}
+                </div>
+              </div>
+            </Card>
+          </section>
+        ) : null}
+
+        {/* Experiencia */}
+        <section aria-label="Experiencia">
+          <h3 className="text-muted mb-4 text-xs tracking-widest uppercase">Experiencia</h3>
+          <ul className="space-y-3">
+            {experience.map((item) => (
+              <li key={item.id} className="flex flex-wrap items-baseline gap-3">
+                <span className="font-display font-bold">{item.company}</span>
+                <span className="text-muted text-sm">
+                  {item.period.start} — {item.period.end ?? t('experience.present')}
+                </span>
+                {item.isCurrent ? (
+                  <span className="bg-cyan rounded-full px-2 py-0.5 text-[10px] font-bold tracking-widest text-black uppercase">
+                    {t('experience.current')}
+                  </span>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
 
-      <dl className="grid grid-cols-2 gap-3 text-sm">
-        <dt className="text-slate-500">{t('nav.skills')}</dt>
-        <dd>
-          {skillCount} / {skills.length}
-        </dd>
-
-        <dt className="text-slate-500">{t('nav.projects')}</dt>
-        <dd>{projects.length}</dd>
-
-        <dt className="text-slate-500">{t('nav.experience')}</dt>
-        <dd>{experience.length}</dd>
-
-        <dt className="text-slate-500">{t('experience.current')}</dt>
-        <dd>{current ? current.company : '—'}</dd>
-      </dl>
-
-      <p className="text-xs text-slate-600">Fase 1 — contenido e i18n</p>
+      <p className="text-muted mt-20 text-xs">Fase 2 — design system</p>
     </main>
   )
 }
