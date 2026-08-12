@@ -80,10 +80,28 @@ sin tocar un solo componente.
 | 3    | Secciones                        | ✅     |
 | 4    | Movimiento                       | ✅     |
 | 5    | Escena 3D                        | ✅     |
-| 6    | Formulario y CV                  | ⏳     |
-| 7    | SEO, performance y accesibilidad | ⏳     |
+| 6    | Formulario y CV                  | ✅\*   |
+| 7    | SEO, performance y accesibilidad | ✅     |
+
+\* El código está completo y probado, pero el formulario **no envía correos todavía**:
+faltan las variables de entorno. Ver abajo.
 
 ## Variables de entorno
 
-Copiar `.env.example` a `.env.local`. Ninguna es necesaria hasta la Fase 6; el sitio
-arranca y compila sin configurar nada.
+Copiar `.env.example` a `.env.local`. El sitio arranca y compila sin ninguna.
+
+| Variable                                                 | Para qué                | Sin ella                                                                                         |
+| -------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------ |
+| `RESEND_API_KEY` `CONTACT_FROM_EMAIL` `CONTACT_TO_EMAIL` | Envío del formulario    | El formulario valida y responde, pero **no envía**: avisa por consola y ofrece el correo directo |
+| `UPSTASH_REDIS_REST_URL` `UPSTASH_REDIS_REST_TOKEN`      | Límite de envíos por IP | Se acepta todo envío; el honeypot sigue filtrando. Avisa por consola                             |
+| `NEXT_PUBLIC_SITE_URL`                                   | URLs canónicas y OG     | Se usan rutas relativas                                                                          |
+
+**Resend requiere un dominio propio verificado por DNS.** Sin él, el remitente sería
+una dirección de pruebas del proveedor.
+
+## CV
+
+El botón de descarga aparece solo cuando `profile.cv` está definido en
+`src/content/profile.ts`. Para activarlo: dejar los PDF en `public/cv/` y
+descomentar ese campo. Mientras tanto no se muestra, que es preferible a un enlace
+que devuelve 404.

@@ -76,6 +76,17 @@ export const profile: Profile = {
     },
   ],
 
+  /*
+   * CV en PDF. Descomentar cuando los archivos existan en public/cv/.
+   * Mientras esté ausente, la sección de contacto no muestra el botón de
+   * descarga — mejor eso que un enlace que devuelve 404.
+   *
+   * cv: {
+   *   es: '/cv/alejandro-restrepo-es.pdf',
+   *   en: '/cv/alejandro-restrepo-en.pdf',
+   * },
+   */
+
   stats: [
     { id: 'years-experience', value: 4, suffix: '+', labelKey: 'yearsExperience' },
     { id: 'companies', value: 4, suffix: '', labelKey: 'companies' },

@@ -28,6 +28,8 @@ type ButtonProps = {
   variant?: ButtonVariant
   /** Si se pasa, se renderiza un enlace en lugar de un boton. */
   href?: string
+  /** Descarga el destino en lugar de abrirlo. Solo tiene efecto con `href`. */
+  download?: boolean
   className?: string
   children: React.ReactNode
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'className' | 'children'>
@@ -40,7 +42,14 @@ type ButtonProps = {
  * la pagina destino con acceso a `window.opener` y capacidad de redirigir la
  * pestaña de origen.
  */
-export function Button({ variant = 'fill', href, className, children, ...props }: ButtonProps) {
+export function Button({
+  variant = 'fill',
+  href,
+  download,
+  className,
+  children,
+  ...props
+}: ButtonProps) {
   const classes = buttonStyles(variant, className)
 
   if (href) {
@@ -50,7 +59,10 @@ export function Button({ variant = 'fill', href, className, children, ...props }
       <a
         href={href}
         className={classes}
-        {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
+        {...(download && { download: '' })}
+        // Una descarga no debe abrirse en otra pestaña: dejaria una pestaña en
+        // blanco tras completarse.
+        {...(external && !download && { target: '_blank', rel: 'noopener noreferrer' })}
       >
         {children}
       </a>

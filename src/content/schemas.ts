@@ -51,6 +51,10 @@ export const profileSchema = z.object({
   typewriterRoles: z.array(localized(nonEmpty)).min(1),
   socials: z.array(socialLinkSchema).min(1),
   stats: z.array(statSchema).min(1),
+  // Si se define, tiene que estar en los dos idiomas y apuntar dentro de
+  // public/. Una ruta absoluta a otro dominio aqui seria un enlace roto
+  // esperando a ocurrir.
+  cv: localized(z.string().startsWith('/', 'Debe ser una ruta bajo public/')).optional(),
 })
 
 export const skillCategorySchema = z.object({

@@ -29,7 +29,7 @@ const t = <T>(value: Localized<T>, locale: Locale): T => value[locale]
 
 export type ResolvedProfile = Omit<
   Profile,
-  'location' | 'headline' | 'role' | 'summary' | 'bio' | 'typewriterRoles'
+  'location' | 'headline' | 'role' | 'summary' | 'bio' | 'typewriterRoles' | 'cv'
 > & {
   location: string
   headline: string
@@ -37,6 +37,8 @@ export type ResolvedProfile = Omit<
   summary: RichText
   bio: RichText[]
   typewriterRoles: string[]
+  /** `undefined` mientras no exista el PDF; la vista omite el botón. */
+  cv: string | undefined
 }
 
 export type ResolvedSkillCategory = Omit<SkillCategory, 'title'> & { title: string }
@@ -97,6 +99,7 @@ export function getProfile(locale: Locale): ResolvedProfile {
     summary: t(p.summary, locale),
     bio: p.bio.map((paragraph) => t(paragraph, locale)),
     typewriterRoles: p.typewriterRoles.map((role) => t(role, locale)),
+    cv: p.cv ? t(p.cv, locale) : undefined,
   }
 }
 
