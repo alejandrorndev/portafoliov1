@@ -3,11 +3,10 @@ import { getProfile } from '@/content'
 import type { Locale } from '@/i18n/config'
 
 /*
- * El pie del original decia "Built with Three.js · GSAP · Vanilla JS". Se
- * actualiza al stack real; el credito de Three.js vuelve en la Fase 5, cuando
- * Three.js vuelva a estar.
+ * El pie del original decia "Built with Three.js · GSAP · Vanilla JS".
+ * GSAP ya no esta; Three.js si, desde la Fase 5.
  */
-const STACK = 'Next.js · TypeScript · Tailwind'
+const STACK = 'Next.js · TypeScript · Three.js'
 
 export async function SiteFooter({ locale }: { locale: Locale }) {
   const t = await getTranslations()

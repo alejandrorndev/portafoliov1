@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server'
 import { getProfile } from '@/content'
 import type { Locale } from '@/i18n/config'
 import { Button, GradientText, Reveal, RichText } from '@/shared/ui'
+import { BlackHole } from './BlackHole'
 import { Typewriter } from './Typewriter'
 
 /**
@@ -22,7 +23,12 @@ export async function HeroSection({ locale }: { locale: Locale }) {
 
   return (
     <section id="hero" aria-labelledby="hero-heading" className="relative overflow-hidden">
-      {/* Rejilla y resplandor: decorativos. */}
+      {/*
+        Fondo decorativo. La escena 3D se monta sola si el dispositivo puede y
+        el usuario no pidio menos movimiento; si no, deja su respaldo estatico.
+        El texto de arriba no depende de nada de esto.
+      */}
+      <BlackHole />
       <div aria-hidden="true" className="cosmic-grid absolute inset-0" />
       <div
         aria-hidden="true"
