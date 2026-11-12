@@ -29,15 +29,14 @@ describe('fadeOpacity', () => {
   })
 
   it('sobrevive a una altura de cero', () => {
-    // Pasa entre el primer render y el layout. Dividir ahi daria Infinity y la
-    // escena parpadearia al cargar.
+    // Pasa entre el primer render y el layout. Dividir ahi daria Infinity y el
+    // fondo parpadearia al cargar.
     expect(fadeOpacity(0, 0)).toBe(1)
     expect(fadeOpacity(-100, 0)).toBe(1)
   })
 
   it('el umbral de apagado corta antes de llegar a cero exacto', () => {
-    // Mantener 8.800 particulas dibujandose para una opacidad de 0,004 es
-    // gasto puro.
+    // Seguir dibujando para una opacidad de 0,004 es gasto puro.
     expect(FADE_CUTOFF).toBeGreaterThan(0)
     expect(FADE_CUTOFF).toBeLessThan(0.1)
 

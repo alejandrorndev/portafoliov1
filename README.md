@@ -79,29 +79,36 @@ sin tocar un solo componente.
 | 2    | Design system                    | ✅     |
 | 3    | Secciones                        | ✅     |
 | 4    | Movimiento                       | ✅     |
-| 5    | Escena 3D                        | ✅     |
+| 5    | Fondo animado (ramas)            | ✅     |
 | 6    | Formulario y CV                  | ✅\*   |
 | 7    | SEO, performance y accesibilidad | ✅     |
 
-\* El código está completo y probado, pero el formulario **no envía correos todavía**:
-faltan las variables de entorno. Ver abajo.
+\* El formulario necesita `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` para enviar. Ver abajo.
+
+La Fase 5 fue originalmente una escena 3D de un agujero negro con Three.js. Se
+reemplazó por ramas en canvas 2D que crecen y se detienen solas (adaptadas de
+antfu.me, MIT): en móvil la escena saturaba el sitio y mantenía un bucle de
+render activo, y Three.js sumaba ~235 KB gzip.
 
 ## Variables de entorno
 
 Copiar `.env.example` a `.env.local`. El sitio arranca y compila sin ninguna.
 
-| Variable                                                 | Para qué                | Sin ella                                                                                         |
-| -------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------ |
-| `RESEND_API_KEY` `CONTACT_FROM_EMAIL` `CONTACT_TO_EMAIL` | Envío del formulario    | El formulario valida y responde, pero **no envía**: avisa por consola y ofrece el correo directo |
-| `UPSTASH_REDIS_REST_URL` `UPSTASH_REDIS_REST_TOKEN`      | Límite de envíos por IP | Se acepta todo envío; el honeypot sigue filtrando. Avisa por consola                             |
-| `NEXT_PUBLIC_SITE_URL`                                   | URLs canónicas y OG     | Se usan rutas relativas                                                                          |
+| Variable                                            | Para qué                | Sin ella                                                                                         |
+| --------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------ |
+| `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`                  | Envío del formulario    | El formulario valida y responde, pero **no envía**: avisa por consola y ofrece el correo directo |
+| `UPSTASH_REDIS_REST_URL` `UPSTASH_REDIS_REST_TOKEN` | Límite de envíos por IP | Se acepta todo envío; el honeypot sigue filtrando. Avisa por consola                             |
+| `NEXT_PUBLIC_SITE_URL`                              | URLs canónicas y OG     | Se usan rutas relativas                                                                          |
 
-**Resend requiere un dominio propio verificado por DNS.** Sin él, el remitente sería
-una dirección de pruebas del proveedor.
+**El envío lo hace el navegador, no el servidor:** el plan gratis de Web3Forms no
+acepta envíos desde servidor. El servidor sigue validando y aplicando el límite por IP
+antes. La access key es pública por diseño.
 
 ## CV
 
-El botón de descarga aparece solo cuando `profile.cv` está definido en
-`src/content/profile.ts`. Para activarlo: dejar los PDF en `public/cv/` y
-descomentar ese campo. Mientras tanto no se muestra, que es preferible a un enlace
-que devuelve 404.
+Un PDF por idioma en `public/cv/alejandro-restrepo-{es,en}.pdf`. URLs cortas para
+compartir: `/cv` y `/cv/es` (español), `/cv/en` (inglés). Llevan `X-Robots-Tag:
+noindex` para no aparecer en buscadores. Un test exige que los PDF existan.
+
+Para actualizar el CV, reemplazar el archivo con el **mismo nombre**: los enlaces ya
+enviados siguen funcionando.

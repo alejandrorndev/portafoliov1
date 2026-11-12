@@ -4,15 +4,14 @@ import { useEffect, useRef, useState, type RefObject } from 'react'
 import { FADE_CUTOFF, fadeOpacity } from './fade'
 
 /**
- * Desvanece la escena a medida que el hero sale de pantalla.
+ * Desvanece el fondo a medida que el hero sale de pantalla.
  *
  * La opacidad se escribe directamente en el DOM a traves de una ref, sin pasar
  * por el estado de React. Un re-render por cada evento de scroll es
- * exactamente lo que no puede ocurrir mientras hay 8.800 particulas
- * dibujandose detras.
+ * trabajo de mas en el momento en que el navegador mas lo nota.
  *
  * Lo unico que sí es estado es `visible`, un booleano que cambia dos veces en
- * toda la visita y que decide si el bucle de render sigue vivo.
+ * toda la visita y que decide si las ramas siguen creciendo.
  *
  * La medida se toma dentro de requestAnimationFrame: llamar a
  * getBoundingClientRect() directamente en el manejador de scroll fuerza al

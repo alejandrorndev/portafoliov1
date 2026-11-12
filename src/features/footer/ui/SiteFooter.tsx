@@ -4,9 +4,9 @@ import type { Locale } from '@/i18n/config'
 
 /*
  * El pie del original decia "Built with Three.js · GSAP · Vanilla JS".
- * GSAP ya no esta; Three.js si, desde la Fase 5.
+ * Ni GSAP ni Three.js siguen: el fondo del hero es un canvas 2D.
  */
-const STACK = 'Next.js · TypeScript · Three.js'
+const STACK = 'Next.js · TypeScript · Tailwind CSS'
 
 export async function SiteFooter({ locale }: { locale: Locale }) {
   const t = await getTranslations()
