@@ -42,6 +42,28 @@ describe('validación del formulario', () => {
     },
   )
 
+  it.each([
+    'a@ejemplo.co',
+    'nombre.apellido@empresa.com.co',
+    'usuario+etiqueta@sub.dominio.io',
+    'Mayus_Y-guion@Mi-Dominio.org',
+  ])('acepta el correo válido "%s"', (email) => {
+    expect(errorFor({ ...valid, email }, 'email')).toBeUndefined()
+  })
+
+  it.each([
+    'doble..punto@ejemplo.com',
+    '.empieza@ejemplo.com',
+    'termina.@ejemplo.com',
+    'hola@ejemplo.c',
+    'hola@-ejemplo.com',
+    'hola@ejemplo-.com',
+    'hola@@ejemplo.com',
+    'hola@ejemplo..com',
+  ])('rechaza el correo con formato roto "%s"', (email) => {
+    expect(errorFor({ ...valid, email }, 'email')).toBe('emailInvalid')
+  })
+
   it('distingue correo ausente de correo mal escrito', () => {
     // Decirle "escribe tu correo" a quien escribió uno con una errata es
     // desconcertante: no ve el campo vacío.

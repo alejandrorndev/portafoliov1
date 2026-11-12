@@ -1,3 +1,5 @@
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { LOCALES } from '@/i18n/config'
 import { getExperience, getProfile, getProjects, getSkillCategories } from './index'
@@ -60,6 +62,13 @@ describe('capa de contenido', () => {
       .map(({ es }) => es.id)
 
     expect(untranslated).toEqual([])
+  })
+
+  it('apunta el CV a archivos que existen en public/', () => {
+    for (const locale of LOCALES) {
+      const cv = getProfile(locale).cv
+      if (cv) expect(existsSync(join(process.cwd(), 'public', cv))).toBe(true)
+    }
   })
 
   it('marca como actual exactamente el empleo sin fecha de fin', () => {

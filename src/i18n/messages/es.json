@@ -24,11 +24,31 @@
     "scrollHint": "Explorar"
   },
   "sections": {
-    "about": { "tag": "01 / Sobre mí", "title": "Quién", "accent": "Soy" },
-    "skills": { "tag": "02 / Stack Tecnológico", "title": "Mis", "accent": "Skills" },
-    "projects": { "tag": "03 / Proyectos", "title": "Mi", "accent": "Trabajo" },
-    "experience": { "tag": "04 / Experiencia", "title": "Mi", "accent": "Trayectoria" },
-    "contact": { "tag": "05 / Contacto", "title": "Hablemos de tu", "accent": "Proyecto" }
+    "about": {
+      "tag": "01 / Sobre mí",
+      "title": "Quién",
+      "accent": "Soy"
+    },
+    "skills": {
+      "tag": "02 / Stack Tecnológico",
+      "title": "Mis",
+      "accent": "Skills"
+    },
+    "projects": {
+      "tag": "03 / Proyectos",
+      "title": "Mi",
+      "accent": "Trabajo"
+    },
+    "experience": {
+      "tag": "04 / Experiencia",
+      "title": "Mi",
+      "accent": "Trayectoria"
+    },
+    "contact": {
+      "tag": "05 / Contacto",
+      "title": "Hablemos de tu",
+      "accent": "Proyecto"
+    }
   },
   "stats": {
     "yearsExperience": "Años Exp.",
@@ -56,6 +76,7 @@
       "success": "Mensaje enviado. Te respondo pronto.",
       "error": "No se pudo enviar el mensaje. Inténtalo de nuevo o escríbeme directo a {email}.",
       "privacyNotice": "Al enviar aceptas el <link>aviso de privacidad</link>.",
+      "closeNotice": "Cerrar aviso",
       "errors": {
         "nameRequired": "Escribe tu nombre.",
         "nameTooLong": "El nombre es demasiado largo.",
@@ -101,9 +122,9 @@
     },
     "thirdParties": {
       "title": "Proveedores",
-      "body": "El sitio se aloja en Vercel y el envío del formulario se realiza mediante Resend. Para limitar el abuso automatizado se registra temporalmente la dirección IP del envío en Upstash. Cada proveedor trata esos datos según sus propias políticas."
+      "body": "El sitio se aloja en Vercel y el envío del formulario se realiza mediante Web3Forms. Para limitar el abuso automatizado se registra temporalmente la dirección IP del envío en Upstash. Cada proveedor trata esos datos según sus propias políticas."
     },
-    "updated": "Última actualización: agosto de 2026."
+    "updated": "Última actualización: noviembre de 2026."
   },
   "notFound": {
     "title": "Página no encontrada",

@@ -1,12 +1,16 @@
 'use server'
 
 import { headers } from 'next/headers'
-import { sendContactMessage } from './mailer'
 import { allowSubmission } from './rate-limit'
-import { type ContactState, contactSchema, toFieldErrors } from './schema'
+import { type ContactValidation, contactSchema, toFieldErrors } from './schema'
 
 /**
- * Server Action del formulario de contacto.
+ * Server Action que valida el mensaje ANTES de que el navegador lo envie.
+ *
+ * El envio en si lo hace el cliente (ver web3forms.ts: el plan gratis de
+ * Web3Forms no acepta envios desde servidor). La validacion se queda aqui por
+ * dos motivos: el esquema vive en un solo sitio sin arrastrar zod al bundle,
+ * y el limite por IP necesita ver la IP real, que solo conoce el servidor.
  *
  * Orden deliberado: primero se valida, despues se mira el limite de tasa.
  * Al reves, un usuario legitimo que se equivoca tres veces escribiendo su
@@ -15,10 +19,7 @@ import { type ContactState, contactSchema, toFieldErrors } from './schema'
  * El honeypot se trata como exito. Decirle a un bot "detectado" le da la
  * señal que necesita para ajustarse; que crea que funcionó no cuesta nada.
  */
-export async function sendMessage(
-  _previous: ContactState,
-  formData: FormData,
-): Promise<ContactState> {
+export async function validateMessage(formData: FormData): Promise<ContactValidation> {
   const parsed = contactSchema.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
@@ -44,13 +45,5 @@ export async function sendMessage(
     return { status: 'error', reason: 'rateLimited' }
   }
 
-  const result = await sendContactMessage(parsed.data)
-
-  if (!result.ok) {
-    // El motivo se queda en el servidor: al visitante se le ofrece el correo
-    // directo como alternativa, que es lo unico que le sirve.
-    return { status: 'error', reason: 'unexpected' }
-  }
-
-  return { status: 'success' }
+  return { status: 'valid', data: parsed.data }
 }

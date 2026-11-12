@@ -56,6 +56,7 @@
       "success": "Message sent. I'll get back to you soon.",
       "error": "The message couldn't be sent. Try again or email me directly at {email}.",
       "privacyNotice": "By sending this you accept the <link>privacy notice</link>.",
+      "closeNotice": "Close notice",
       "errors": {
         "nameRequired": "Enter your name.",
         "nameTooLong": "That name is too long.",
@@ -101,9 +102,9 @@
     },
     "thirdParties": {
       "title": "Providers",
-      "body": "The site is hosted on Vercel and form submissions are sent through Resend. To limit automated abuse, the submitting IP address is stored temporarily in Upstash. Each provider processes that data under its own policies."
+      "body": "The site is hosted on Vercel and form submissions are sent through Web3Forms. To limit automated abuse, the submitting IP address is stored temporarily in Upstash. Each provider processes that data under its own policies."
     },
-    "updated": "Last updated: August 2026."
+    "updated": "Last updated: November 2026."
   },
   "notFound": {
     "title": "Page not found",
