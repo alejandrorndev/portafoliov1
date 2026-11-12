@@ -2,16 +2,16 @@ import { getTranslations } from 'next-intl/server'
 import { getProfile } from '@/content'
 import type { Locale } from '@/i18n/config'
 import { Button, GradientText, Reveal, RichText } from '@/shared/ui'
-import { BlackHole } from './BlackHole'
+import { PlumBackground } from './Plum'
 import { Typewriter } from './Typewriter'
 
 /**
  * Seccion de portada.
  *
- * El fondo es por ahora la rejilla cosmica y el resplandor inferior en CSS. La
- * escena 3D del agujero negro entra en la Fase 5, montada por encima de esto y
- * con este mismo tratamiento como respaldo cuando WebGL no este disponible o
- * el usuario pida menos movimiento.
+ * El fondo son ramas que crecen desde los bordes y se detienen solas (ver
+ * Plum/), sobre la rejilla cosmica y el resplandor inferior en CSS. Reemplazo
+ * a la escena 3D del agujero negro, que en movil saturaba el sitio y mantenia
+ * un bucle de render activo durante toda la visita.
  *
  * El texto no depende del fondo: se renderiza en servidor y es el candidato a
  * LCP. En el original quedaba oculto tras un cargador de 1,5 s que simulaba
@@ -24,11 +24,10 @@ export async function HeroSection({ locale }: { locale: Locale }) {
   return (
     <section id="hero" aria-labelledby="hero-heading" className="relative overflow-hidden">
       {/*
-        Fondo decorativo. La escena 3D se monta sola si el dispositivo puede y
-        el usuario no pidio menos movimiento; si no, deja su respaldo estatico.
-        El texto de arriba no depende de nada de esto.
+        Fondo decorativo. Con menos movimiento las ramas se dibujan completas
+        de una vez. El texto de arriba no depende de nada de esto.
       */}
-      <BlackHole />
+      <PlumBackground />
       <div aria-hidden="true" className="cosmic-grid absolute inset-0" />
       <div
         aria-hidden="true"

@@ -24,7 +24,7 @@ export function useInView<T extends HTMLElement>(options?: {
   /**
    * `true` (por defecto) dispara una vez y se desconecta: es lo que quieren
    * los reveals. `false` sigue informando de entradas y salidas, que es lo que
-   * necesita la escena 3D para apagar su bucle de render al salir de pantalla.
+   * necesita un fondo animado para pausarse al salir de pantalla.
    */
   once?: boolean
 }) {
