@@ -77,15 +77,16 @@ export const profile: Profile = {
   ],
 
   /*
-   * CV en PDF. Descomentar cuando los archivos existan en public/cv/.
-   * Mientras esté ausente, la sección de contacto no muestra el botón de
-   * descarga — mejor eso que un enlace que devuelve 404.
+   * CV en PDF, servido desde public/cv/. Un test exige que cada ruta exista,
+   * asi que borrar el archivo sin quitar esta entrada no llega a produccion.
    *
-   * cv: {
-   *   es: '/cv/alejandro-restrepo-es.pdf',
-   *   en: '/cv/alejandro-restrepo-en.pdf',
-   * },
+   * El nombre no lleva fecha ni version: actualizar el CV es reemplazar el
+   * archivo, y los enlaces ya enviados a reclutadores siguen funcionando.
    */
+  cv: {
+    es: '/cv/alejandro-restrepo-es.pdf',
+    en: '/cv/alejandro-restrepo-en.pdf',
+  },
 
   stats: [
     { id: 'years-experience', value: 4, suffix: '+', labelKey: 'yearsExperience' },

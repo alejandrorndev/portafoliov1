@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { MESSAGE_MAX, MESSAGE_MIN, NAME_MAX } from './limits'
+import { EMAIL_PATTERN, MESSAGE_MAX, MESSAGE_MIN, NAME_MAX } from './limits'
 
 /*
  * -----------------------------------------------------------------------------
@@ -18,12 +18,14 @@ import { MESSAGE_MAX, MESSAGE_MIN, NAME_MAX } from './limits'
  * -----------------------------------------------------------------------------
  */
 
-export { MESSAGE_MAX, MESSAGE_MIN, NAME_MAX } from './limits'
+export { EMAIL_PATTERN, MESSAGE_MAX, MESSAGE_MIN, NAME_MAX } from './limits'
 
 export const contactSchema = z.object({
   name: z.string().trim().min(1, 'nameRequired').max(NAME_MAX, 'nameTooLong'),
 
-  email: z.string().trim().min(1, 'emailRequired').pipe(z.email('emailInvalid')),
+  // El mismo patron que valida el cliente al salir del campo: si divergieran,
+  // el formulario aceptaria un correo que el servidor luego rechaza.
+  email: z.string().trim().min(1, 'emailRequired').regex(EMAIL_PATTERN, 'emailInvalid'),
 
   message: z
     .string()
@@ -52,6 +54,9 @@ export type ContactState =
   | { status: 'success' }
   | { status: 'error'; reason: 'validation'; fields: FieldErrors }
   | { status: 'error'; reason: 'rateLimited' | 'unexpected' }
+
+/** Lo que devuelve la validacion del servidor: un estado final o datos listos para enviar. */
+export type ContactValidation = ContactState | { status: 'valid'; data: ContactInput }
 
 /** Extrae los errores de Zod al mapa de claves por campo. */
 export function toFieldErrors(error: z.ZodError<ContactInput>): FieldErrors {
